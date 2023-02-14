@@ -1,6 +1,6 @@
 # FINDER VERSÃO 3.0
 
-Este pacote fornece o FINDER_V3,
+Este pacote fornece o FINDER_V3, um gerador de ZONA PROXÊMICA individual que, junto com o YOLO V5, detecta a posição do obstaculo no ambiente e gera a zona proxêmica daquele respectivo obstáculo. 
 
 
 # Ambiente de desenvolvimento：
@@ -8,54 +8,74 @@ Este pacote fornece o FINDER_V3,
 - ROS Melodic
 - Python>=3.6.0
 
+
+Por estarmos utilizando o ROS Melodic, o catkin_make apenas compila scripts Python 2, por isso clonaremos uma nova WORKSPACE especificamente para rodar Python 3.
+
 # Pré-requisitos:
 
+## Dependências:
+
+```
+sudo apt-get install python3-pip python-catkin-tools python3-dev python3-numpy 
+
+sudo pip3 install rospkg catkin_pkg
+```
 
 ## Instalando FINDER-V3
 
-### 1. Clone os arquivos para a Workspace de sua preferência:
+### 1. Clone os arquivos para sua Pasta Pessoal:
 
 ```
-cd /your/catkin_ws/src
-
 git clone https://github.com/fabioabdon/Finder-3.0.git
-
-cd yolov5_ros/yolov5
 ```
-### 2. Instale os pre-requisitos no ambiente virtual criado
+### 2. Compilação
 
 ```
-sudo pip install -r requirements.txt
+cd ~/cvbridge_build_ws 
+
+catkin config -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/x86_64-linux-gnu/libpython3.6m.so 
+
+catkin config --instalar
 ```
+
+NOTA: Altere o caminho do python de acordo, você pode verificar o local via Python 3.
+
+```
+python3 
+
+import sys
+
+print(sys.executable) #Print python3 executável path
+
+print(sys.path) #Imprimir caminho da biblioteca python3
+
+python3-config --includes #Arquivos de inclusão
+```
+
+Após a conclusão da configuração, crie o pacote:
+
+
+```
+catkin construir cv_bridge
+```
+
+### 3. Clonando Plugin
+Para que o Finder funcione, será necessário baixar o plugin na Workspace onde está localizado o robô. O tutorial pode ser encontrado [aqui](https://github.com/iml130/proxemic_layer). 
 
 ## Ajustando os parâmetros
 
-1. Certifique-se de colocar seus pesos na pasta [weights](https://github.com/fabioabdon/YOLOV5-ROS/tree/main/yolov5_ros/yolov5_ros/weights). 
-2. Caso o arquivo dos pesos estejam com um nome diferente, altere-o em `launch/yolo_v5.launch`.
-3. Altere o tópico da imagem que deseja utilizar em `launch/yolo_v5.launch`.
+1. Altere o tópico da imagem de profundidade que deseja utilizar em `Finder_3.0/finder_v3.0.py`.
 
-## Iniciar yolov5_ros
+
+## Inicializando Finder V3
 
 ```
-roslaunch yolov5_ros yolo_v5.launch
+cd Finder-3.0
+
+source install/setup.bash --extend
+
+cd src/Finder_2.0/
+
+python3 finder_v3.0.py
 ```
 
-
-## Parâmetros do nó
-
-* **`image_topic`** 
-
-    Tópico de câmera inscrito.
-
-* **`weights_path`** 
-
-    Caminho para o arquivo de pesos.
-
-* **`pub_topic`** 
-
-    Tópico publicado com as caixas delimitadoras detectadas.
-    
-* **`confidence`** 
-
-    Limite de confiança para objetos detectados.
-    
