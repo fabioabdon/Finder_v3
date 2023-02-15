@@ -79,3 +79,6 @@ cd src/Finder_2.0/
 python3 finder_v3.0.py
 ```
 
+## Referencia para criar workspace no ROS com Python3
+https://cyaninfinite.com/ros-cv-bridge-with-python-3/
+
