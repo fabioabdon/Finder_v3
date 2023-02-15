@@ -11,6 +11,16 @@ Este pacote fornece o FINDER_V3, um gerador de ZONA PROXÊMICA individual que, j
 
 Por estarmos utilizando o ROS Melodic, o catkin_make apenas compila scripts Python 2, por isso clonaremos uma nova WORKSPACE especificamente para rodar Python 3.
 
+# Tópicos de leitura e escrita necessários:
+
+## Leitura
+- Bounding box (X_max, Y_max, X_min, Y_min)
+- Localização do robô em tempo real (amcl_pose)
+
+## Escrita
+- People
+
+
 # Pré-requisitos:
 
 ## Dependências:
