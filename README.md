@@ -36,12 +36,12 @@ sudo pip3 install rospkg catkin_pkg
 ### 1. Clone os arquivos para sua Pasta Pessoal:
 
 ```
-git clone https://github.com/fabioabdon/Finder-3.0.git
+git clone https://github.com/fabioabdon/Finder_v3.git
 ```
 ### 2. Compilação
 
 ```
-cd ~/cvbridge_build_ws 
+cd ~/Finder_v3 
 
 catkin config -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6m -DPYTHON_LIBRARY=/usr/x86_64-linux-gnu/libpython3.6m.so 
 
